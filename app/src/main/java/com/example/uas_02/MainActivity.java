@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private int mColorBackground;
     Paint mCirclePaint = new Paint();
     Paint mHeadPaint = new Paint();
+    ObjectAnimator AnimasiFlip;
+    ObjectAnimator AnimasiFadeIn;
+    ObjectAnimator AnimasiFadeOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         mCirclePaint.setColor(getResources().getColor(R.color.black));
         mHeadPaint.setColor(getResources().getColor(R.color.white));
+
+        // Flip
+        AnimasiFlip = ObjectAnimator.ofFloat(mImgView,"rotationY", 180);
+        AnimasiFadeIn = ObjectAnimator.ofFloat(mImgView, "alpha", 0, 1f);
+        AnimasiFadeOut = ObjectAnimator.ofFloat(mImgView, "alpha", 1f, 0);
     }
 
     @Override
@@ -51,6 +59,19 @@ public class MainActivity extends AppCompatActivity {
         drawRightEye(vWidth, vHeight);
         drawLeftEye(vWidth, vHeight);
         drawEyeConnector(vWidth, vHeight);
+
+        AnimasiFadeIn.setDuration(1000);
+        AnimasiFadeIn.start();
+
+        AnimasiFlip.setDuration(3000);
+        AnimasiFlip.setStartDelay(1000);
+        AnimasiFlip.getStartDelay();
+        AnimasiFlip.start();
+
+        AnimasiFadeOut.setStartDelay(4000);
+        AnimasiFadeOut.getStartDelay();
+        AnimasiFadeOut.setDuration(1000);
+        AnimasiFadeOut.start();
     }
 
     public void drawHead(float centerX, float centerY, float radiusX, float radiusY) {
